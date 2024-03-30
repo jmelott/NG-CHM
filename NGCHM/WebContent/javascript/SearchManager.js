@@ -906,6 +906,10 @@
     SRCH.clearSearch = function () {
 	UTIL.closeCheckBoxDropdown('srchCovSelectBox','srchCovCheckBoxes');
 	const searchTarget = document.getElementById('search_target').value;
+	SRCH.clearSearchTarget(searchTarget);
+	 }
+
+	SRCH.clearSearchTarget = function (searchTarget) {
 	SUM.clearSelectionMarks(searchTarget);
 	clearSearchRequest(searchTarget);
 	if (searchTarget === "Row") {

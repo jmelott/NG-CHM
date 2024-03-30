@@ -1129,11 +1129,11 @@
 			 });
 			 if (matches.length > 0) {
 				  // Get the current state of the selected list
-				  let currentSelectedList = SRCHSTATE.getAxisSearchResultsVec(axis);
+				  let currentSelectedList = SRCHSTATE.getAxisSearchResults(axis);
 				  // Append the new results to the current selected list
 				  let updatedList = currentSelectedList.concat(matches);
 				  // Set the updated list
-				  SRCHSTATE.setAxisSearchResultsVec(axis, updatedList);
+				  SRCHSTATE.setAxisSearchResults(axis, updatedList);
 				  if (itemsFound.indexOf(searchItem) == -1)
 						itemsFound.push(searchItem);
 			 }   

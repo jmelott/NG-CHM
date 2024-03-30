@@ -1110,7 +1110,7 @@
 	  * @param {*} searchItems 
 	  * @returns list of items found
      ***********************************************************************************/
-	 function searchExactUpperLabels(axis, searchItems) {
+	 	SRCH.searchExactUpperLabels = function(axis, searchItems) {
 		const heatMap = MMGR.getHeatMap();
 		const labels = heatMap.getAxisLabels(axis)["labels"]
 			 .map(label => {

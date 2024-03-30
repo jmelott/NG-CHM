@@ -1099,6 +1099,44 @@
 	    SRCH.showSearchResults();
     };
 
+	 /** 
+	  * Function to add a list of labels to the search results
+	  * 
+	  * @param {*} axis 
+	  * @param {*} searchItems 
+	  * @returns list of items found
+	  */
+	 function searchExactLabels(axis, searchItems) {
+		const heatMap = MMGR.getHeatMap();
+		const labels = heatMap.getAxisLabels(axis)["labels"]
+			 .map(label => {
+				  label = label.toUpperCase();
+				  if (label.indexOf('|') > -1) {
+						label = label.substring(0,label.indexOf('|'));
+				  }
+				  return label;
+			 });
+		let itemsFound = [];
+		for (let i = 0; i < searchItems.length; i++) {
+			 const searchItem = searchItems[i].toUpperCase();
+			 let matches = [];
+			 labels.forEach((label, index) => {
+				  if (label === searchItem) matches.push(index + 1);
+			 });
+			 if (matches.length > 0) {
+				  // Get the current state of the selected list
+				  let currentSelectedList = SRCHSTATE.getAxisSearchResultsVec(axis);
+				  // Append the new results to the current selected list
+				  let updatedList = currentSelectedList.concat(matches);
+				  // Set the updated list
+				  SRCHSTATE.setAxisSearchResultsVec(axis, updatedList);
+				  if (itemsFound.indexOf(searchItem) == -1)
+						itemsFound.push(searchItem);
+			 }   
+		}
+		SRCH.showSearchResults();
+		return itemsFound;
+  }
 /***********************************************************
  * End - Search Functions
  ***********************************************************/

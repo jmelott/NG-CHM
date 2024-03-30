@@ -570,36 +570,36 @@
      * Internal FUNCTION - searchLabels: The purpose of this function is to search through
      * labels collections for matches.
      ***********************************************************************************/
-    function searchLabels (axis,tmpSearchItems,itemsFound) {
-	const heatMap = MMGR.getHeatMap();
-	const labels = heatMap.getAxisLabels(axis)["labels"]
-	    .map (label => {
-		label = label.toUpperCase();
-		if (label.indexOf('|') > -1) {
-			label = label.substring(0,label.indexOf('|'));
+	function searchLabels(axis, tmpSearchItems, itemsFound) {
+		const heatMap = MMGR.getHeatMap();
+		const labels = heatMap.getAxisLabels(axis)["labels"]
+			.map(label => {
+				label = label.toUpperCase();
+				if (label.indexOf('|') > -1) {
+					label = label.substring(0, label.indexOf('|'));
+				}
+				return label;
+			});
+		for (let j = 0; j < tmpSearchItems.length; j++) {
+			let reg;
+			const searchItem = tmpSearchItems[j];
+			if (searchItem == "." || searchItem == "*") { // if this is a search item that's going to return everything, skip it.
+				continue;
+			}
+			if (searchItem.charAt(0) == "\"" && searchItem.slice(-1) == "\"") { // is it wrapped in ""?
+				reg = new RegExp("^" + searchItem.toUpperCase().slice(1, -1).replace(".", "\\.") + "$");
+			} else {
+				reg = new RegExp(searchItem.toUpperCase());
+			}
+			let matches = [];
+			labels.forEach((label, index) => { if (reg.test(label)) matches.push(index + 1); });
+			if (matches.length > 0) {
+				SRCHSTATE.setAxisSearchResultsVec(axis, matches);
+				if (itemsFound.indexOf(searchItem) == -1)
+					itemsFound.push(searchItem);
+			}
 		}
-		return label;
-	    });
-	for (let j = 0; j < tmpSearchItems.length; j++) {
-		let reg;
-		const searchItem = tmpSearchItems[j];
-		if (searchItem == "." || searchItem == "*"){ // if this is a search item that's going to return everything, skip it.
-			continue;
-		}
-		if (searchItem.charAt(0) == "\"" && searchItem.slice(-1) == "\""){ // is it wrapped in ""?
-			reg = new RegExp("^" + searchItem.toUpperCase().slice(1,-1).replace(".","\\.") + "$");
-		} else {
-			reg = new RegExp(searchItem.toUpperCase());
-		}
-		let matches = [];
-		labels.forEach((label,index) => { if (reg.test(label)) matches.push (index+1); });
-		if (matches.length > 0) {
-		    SRCHSTATE.setAxisSearchResultsVec(axis, matches);
-		    if (itemsFound.indexOf(searchItem) == -1)
-			    itemsFound.push(searchItem);
-		}	
 	}
-    }
 
     /**********************************************************************************/
 
@@ -1096,21 +1096,21 @@
     *
     *  @function redrawSearchResults
     */
-    SRCH.redrawSearchResults = function () {
+    	 SRCH.redrawSearchResults = function () {
 	    DET.updateDisplayedLabels();
 	    SUM.redrawSelectionMarks();
 	    DET.updateSelections();
 	    SRCH.showSearchResults();
     };
 
-	 /** 
-	  * Function to add a list of labels to the search results
-	  * 
-	  * @param {*} axis 
+    /**********************************************************************************
+     * FUNCTION - searchExactLabels: The purpose of this function is to search through
+     * a list of labels for exact matches of upper case versions of text on the specified axis.
+	 * @param {*} axis 
 	  * @param {*} searchItems 
 	  * @returns list of items found
-	  */
-	 function searchExactLabels(axis, searchItems) {
+     ***********************************************************************************/
+	 function searchExactUpperLabels(axis, searchItems) {
 		const heatMap = MMGR.getHeatMap();
 		const labels = heatMap.getAxisLabels(axis)["labels"]
 			 .map(label => {
@@ -1138,7 +1138,7 @@
 						itemsFound.push(searchItem);
 			 }   
 		}
-		SRCH.showSearchResults();
+		redrawSearchResults()
 		return itemsFound;
   }
 /***********************************************************

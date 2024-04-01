@@ -940,7 +940,7 @@ var linkoutsVersion = 'undefined';
 	    uploadToBuilder ("all", data, [], []);
 	}
 
-	function uploadSelectedToBuilder (data, axis) {
+	LNK.uploadSelectedToBuilder = function (data, axis) {
 	    const rowRanges = NgChm.UTIL.getContigRanges (NgChm.SRCHSTATE.getAxisSearchResults('Row'));
 	    const colRanges = NgChm.UTIL.getContigRanges (NgChm.SRCHSTATE.getAxisSearchResults('Column'));
 	    uploadToBuilder ("selected", data, rowRanges, colRanges);

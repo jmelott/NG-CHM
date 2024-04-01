@@ -949,6 +949,8 @@ var linkoutsVersion = 'undefined';
 	}
 
 	function uploadSelectedToBuilder (data, axis) {
+		console.log(axis);
+		console.log(data);
 	    const rowRanges = NgChm.UTIL.getContigRanges (NgChm.SRCHSTATE.getAxisSearchResults('Row'));
 	    const colRanges = NgChm.UTIL.getContigRanges (NgChm.SRCHSTATE.getAxisSearchResults('Column'));
 	    uploadToBuilder ("selected", data, rowRanges, colRanges);

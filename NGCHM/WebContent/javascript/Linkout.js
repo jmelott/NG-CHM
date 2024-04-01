@@ -937,7 +937,7 @@ var linkoutsVersion = 'undefined';
 	}
 
 	LNK.uploadAllToBuilder = function (data, axis) {
-		uploadSelectedToBuilder (data, axis)
+		uploadSelectedToBuilder (data, axis);
 	}
 
 	function uploadAllToBuilder (data, axis) {
@@ -945,7 +945,7 @@ var linkoutsVersion = 'undefined';
 	}
 
 	LNK.uploadSelectedToBuilder = function (data, axis) {
-		uploadSelectedToBuilder (data, axis)
+		uploadSelectedToBuilder (data, axis);
 	}
 
 	function uploadSelectedToBuilder (data, axis) {
@@ -954,11 +954,11 @@ var linkoutsVersion = 'undefined';
 	    uploadToBuilder ("selected", data, rowRanges, colRanges);
 	}
 
-	LNK.uploadToBuilder = function (selectType, data, rowSelection, colSelection) {
-		uploadToBuilder (selectType, data, rowSelection, colSelection)
+	function uploadToBuilder (selectType, data, rowSelection, colSelection) {
+		LNK.uploadToBuilder (selectType, data, rowSelection, colSelection);
 	}
 
-	function uploadToBuilder (selectType, data, rowSelection, colSelection) {
+	LNK.uploadToBuilder = function (selectType, data, rowSelection, colSelection) {
 	    const heatMap = MMGR.getHeatMap();
 	    const msgBox = UHM.newMessageBox('upload');
 	    UHM.setNewMessageBoxHeader (msgBox, "Upload " + selectType + " NG-CHM data to NG-CHM Builder");

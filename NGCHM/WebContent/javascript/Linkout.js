@@ -936,14 +936,26 @@ var linkoutsVersion = 'undefined';
 		window.open("","",'width=335,height=330,resizable=1').document.write("<b>Rows:</b><br>" + labels["Row"].join("<br>") + "<br><br><b>Columns:</b><br>" + labels["Column"].join("<br>"));
 	}
 
+	LNK.uploadAllToBuilder = function (data, axis) {
+		uploadSelectedToBuilder (data, axis)
+	}
+
 	function uploadAllToBuilder (data, axis) {
 	    uploadToBuilder ("all", data, [], []);
 	}
 
 	LNK.uploadSelectedToBuilder = function (data, axis) {
+		uploadSelectedToBuilder (data, axis)
+	}
+
+	function uploadSelectedToBuilder (data, axis) {
 	    const rowRanges = NgChm.UTIL.getContigRanges (NgChm.SRCHSTATE.getAxisSearchResults('Row'));
 	    const colRanges = NgChm.UTIL.getContigRanges (NgChm.SRCHSTATE.getAxisSearchResults('Column'));
 	    uploadToBuilder ("selected", data, rowRanges, colRanges);
+	}
+
+	LNK.uploadToBuilder = function (selectType, data, rowSelection, colSelection) {
+		uploadToBuilder (selectType, data, rowSelection, colSelection)
 	}
 
 	function uploadToBuilder (selectType, data, rowSelection, colSelection) {

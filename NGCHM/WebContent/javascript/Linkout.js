@@ -3087,6 +3087,22 @@ var linkoutsVersion = 'undefined';
 		}
 	});
 
+	defineVanodiMessageHandler('clearAxisMapSelection',
+	/**
+	Clears current selections on the specified axis and updates the display.
+	**/
+		async function vanodiClearCurrentMapSelection(instance, msg)
+		{
+			axis="Row";
+			if (msg.axis == 'Column') axis = 'Column';
+			SRCHSTATE.clearAllAxisSearchItems(axis);
+			DET.updateDisplayedLabels();
+			SUM.redrawSelectionMarks();
+			DET.updateSelections();
+			SRCH.showSearchResults();
+		}
+	);
+
 	// Listen for messages from plugins.
 	(function() {
 		window.addEventListener('message', processMessage, false);

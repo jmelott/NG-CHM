@@ -3104,6 +3104,50 @@ var linkoutsVersion = 'undefined';
 		}
 	);
 
+	defineVanodiMessageHandler('selectAxisLabels',
+	/**
+	Clears current selections on the specified axis and updates the display.
+	**/
+		async function vanodiSelectAxisLabels(instance, msg)
+		{
+			let axis = msg.axis;
+			let labelsToSelect = msg.labels;
+
+			const heatMap = MMGR.getHeatMap();
+			const labels = heatMap.getAxisLabels(axis)["labels"].map (label => 
+			{
+				let label = label.toUpperCase();
+				if (label.indexOf('|') > -1) 
+				{
+					label = label.substring(0,label.indexOf('|'));
+				}
+				return label;
+			});
+			
+			//Start with the currently selected items
+			let matches = SRCHSTATE.getAxisSearchResults(axis);
+			
+			// Iterate through each label and add index+1 to matches if text matches.  Duplicates are OK
+			labels.forEach((label, index) => 
+			{
+				if (labelsToSelect.some(labelToSelect => labelToSelect.toUpperCase() === label)) 
+				{
+					matches.push(index + 1);
+				}
+			});
+			if (matches.length > 0)
+			{
+				// Update which labels are selected.
+				SRCHSTATE.setAxisSearchResultsVec(axis, matches);
+				// Update views to show selected items.
+				DET.updateDisplayedLabels();
+				SUM.redrawSelectionMarks();
+				DET.updateSelections();
+				SRCH.showSearchResults();
+			}
+		}
+	);
+
 	// Listen for messages from plugins.
 	(function() {
 		window.addEventListener('message', processMessage, false);

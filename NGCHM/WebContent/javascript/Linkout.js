@@ -3155,6 +3155,7 @@ var linkoutsVersion = 'undefined';
 		**/
 		async function vanodiDeselectAxisLabels(instance, msg)
 		{
+			console.log('deselectAxisLabels called in linkout code');
 			let axis = "Row";
 			if (msg.axis == 'Column') axis = 'Column';
 			let labelsToSelect = msg.labels;
@@ -3178,8 +3179,9 @@ var linkoutsVersion = 'undefined';
 			// Iterate through each label and add index+1 to toRemove if text matches.
 			labels.forEach((label, index) => 
 			{
-				if (genes.some(gene => gene.toUpperCase() === label)) 
+				if (labelsToSelect.some(labelToSelect => labelsToSelect.toUpperCase() === label)) 
 				{
+					console.log('deselecting label: ' + label + ' from axis: ' + axis + ' at index: ' + (index + 1));
 					toRemove.push(index + 1);
 				}
 			});

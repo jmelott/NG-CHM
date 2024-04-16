@@ -3093,7 +3093,7 @@ var linkoutsVersion = 'undefined';
 	**/
 		async function vanodiClearCurrentMapSelection(instance, msg)
 		{
-			axis="Row";
+			var axis="Row";
 			if (msg.axis == 'Column') axis = 'Column';
 			SRCHSTATE.clearAllAxisSearchItems(axis);
 			DET.updateDisplayedLabels();

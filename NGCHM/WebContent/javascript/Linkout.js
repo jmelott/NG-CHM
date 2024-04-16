@@ -3179,7 +3179,7 @@ var linkoutsVersion = 'undefined';
 			// Iterate through each label and add index+1 to toRemove if text matches.
 			labels.forEach((label, index) => 
 			{
-				if (labelsToSelect.some(labelToSelect => labelsToSelect.toUpperCase() === label)) 
+				if (labelsToSelect.some(labelToSelect => labelToSelect.toUpperCase() === label)) 
 				{
 					console.log('deselecting label: ' + label + ' from axis: ' + axis + ' at index: ' + (index + 1));
 					toRemove.push(index + 1);
@@ -3196,11 +3196,11 @@ var linkoutsVersion = 'undefined';
 					}
 				});
 				// Clear all the current selections
-				SRCHSTATE.clearAllAxisSearchItems(axis);
-				DET.updateDisplayedLabels();
-				SUM.redrawSelectionMarks();
-				DET.updateSelections();
-				SRCH.showSearchResults();
+				//SRCHSTATE.clearAllAxisSearchItems(axis);
+				//DET.updateDisplayedLabels();
+				//SUM.redrawSelectionMarks();
+				//DET.updateSelections();
+				//SRCH.showSearchResults();
 
 				// Select the new labels and update views to show them.
 				SRCHSTATE.setAxisSearchResultsVec(axis, newSelection);

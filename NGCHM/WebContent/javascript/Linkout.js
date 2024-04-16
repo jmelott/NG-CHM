@@ -3103,11 +3103,12 @@ var linkoutsVersion = 'undefined';
 			SRCH.showSearchResults();
 		}
 	);
-
+/*
 	defineVanodiMessageHandler('selectAxisLabels',
 	/**
 	Clears current selections on the specified axis and updates the display.
 	**/
+	/*
 		async function vanodiSelectAxisLabels(instance, msg)
 		{
 			let axis = msg.axis;
@@ -3116,7 +3117,7 @@ var linkoutsVersion = 'undefined';
 			const heatMap = MMGR.getHeatMap();
 			const labels = heatMap.getAxisLabels(axis)["labels"].map (label => 
 			{
-				let label = label.toUpperCase();
+				label = label.toUpperCase();
 				if (label.indexOf('|') > -1) 
 				{
 					label = label.substring(0,label.indexOf('|'));
@@ -3147,7 +3148,7 @@ var linkoutsVersion = 'undefined';
 			}
 		}
 	);
-
+*/
 	// Listen for messages from plugins.
 	(function() {
 		window.addEventListener('message', processMessage, false);

@@ -3196,11 +3196,11 @@ var linkoutsVersion = 'undefined';
 					}
 				});
 				// Clear all the current selections
-				//SRCHSTATE.clearAllAxisSearchItems(axis);
-				//DET.updateDisplayedLabels();
-				//SUM.redrawSelectionMarks();
-				//DET.updateSelections();
-				//SRCH.showSearchResults();
+				SRCHSTATE.clearAllAxisSearchItems(axis);
+				DET.updateDisplayedLabels();
+				SUM.redrawSelectionMarks();
+				DET.updateSelections();
+				SRCH.showSearchResults();
 
 				// Select the new labels and update views to show them.
 				SRCHSTATE.setAxisSearchResultsVec(axis, newSelection);

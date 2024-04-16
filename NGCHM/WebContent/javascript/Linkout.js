@@ -3155,7 +3155,6 @@ var linkoutsVersion = 'undefined';
 		**/
 		async function vanodiDeselectAxisLabels(instance, msg)
 		{
-			console.log('deselectAxisLabels called in linkout code');
 			let axis = "Row";
 			if (msg.axis == 'Column') axis = 'Column';
 			let labelsToSelect = msg.labels;
@@ -3181,7 +3180,6 @@ var linkoutsVersion = 'undefined';
 			{
 				if (labelsToSelect.some(labelToSelect => labelToSelect.toUpperCase() === label)) 
 				{
-					console.log('deselecting label: ' + label + ' from axis: ' + axis + ' at index: ' + (index + 1));
 					toRemove.push(index + 1);
 				}
 			});

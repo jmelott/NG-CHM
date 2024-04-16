@@ -3105,9 +3105,9 @@ var linkoutsVersion = 'undefined';
 	);
 
 	defineVanodiMessageHandler('selectAxisLabels',
-	/**
-	Selects the specified labels on the specified axis and updates the display.
-	**/
+		/**
+			Selects the specified labels on the specified axis and updates the display.
+		**/
 		async function vanodiSelectAxisLabels(instance, msg)
 		{
 			let axis = "Row";
@@ -3141,6 +3141,67 @@ var linkoutsVersion = 'undefined';
 				// Update which labels are selected.
 				SRCHSTATE.setAxisSearchResultsVec(axis, matches);
 				// Update views to show selected items.
+				DET.updateDisplayedLabels();
+				SUM.redrawSelectionMarks();
+				DET.updateSelections();
+				SRCH.showSearchResults();
+			}
+		}
+	);
+
+	defineVanodiMessageHandler('deselectAxisLabels',
+		/**
+			Deselects the specified labels on the specified axis and updates the display.
+		**/
+		async function vanodiDeselectAxisLabels(instance, msg)
+		{
+			let axis = "Row";
+			if (msg.axis == 'Column') axis = 'Column';
+			let labelsToSelect = msg.labels;
+
+			const heatMap = MMGR.getHeatMap();
+			const labels = heatMap.getAxisLabels(axis)["labels"].map (label => 
+			{
+				label = label.toUpperCase();
+				if (label.indexOf('|') > -1) 
+				{
+					label = label.substring(0,label.indexOf('|'));
+				}
+				return label;
+			});
+			
+			//Start with the currently selected items
+			let currentMatches = SRCHSTATE.getAxisSearchResults(axis);
+			let toRemove = [];
+			let newSelection = [];
+			
+			// Iterate through each label and add index+1 to toRemove if text matches.
+			labels.forEach((label, index) => 
+			{
+				if (genes.some(gene => gene.toUpperCase() === label)) 
+				{
+					toRemove.push(index + 1);
+				}
+			});
+			
+			if (toRemove.length > 0)
+			{
+				currentMatches.forEach((item, index) =>
+				{
+					if (!toRemove.some(ndx => ndx === item))
+					{
+						newSelection.push(item);
+					}
+				});
+				// Clear all the current selections
+				SRCHSTATE.clearAllAxisSearchItems(axis);
+				DET.updateDisplayedLabels();
+				SUM.redrawSelectionMarks();
+				DET.updateSelections();
+				SRCH.showSearchResults();
+
+				// Select the new labels and update views to show them.
+				SRCHSTATE.setAxisSearchResultsVec(axis, newSelection);
 				DET.updateDisplayedLabels();
 				SUM.redrawSelectionMarks();
 				DET.updateSelections();

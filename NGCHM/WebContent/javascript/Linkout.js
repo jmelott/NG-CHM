@@ -24,6 +24,7 @@ var linkoutsVersion = 'undefined';
     const MAPREP = NgChm.importNS('NgChm.MAPREP');
     const MMGR = NgChm.importNS('NgChm.MMGR');
     const UTIL = NgChm.importNS('NgChm.UTIL');
+	const SUM = NgChm.importNS('NgChm.SUM');
 
     linkouts.VISIBLE_LABELS = "visibleLabels";
     linkouts.HIDDEN_LABELS = "hiddenLabels";
